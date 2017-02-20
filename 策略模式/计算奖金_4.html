@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /* javascript 版本的策略模式 */
+    //定义策略
+    var strategy = {
+        'S' : function( salary ){
+            return salary * 4;
+        },
+        'A' : function( salary ){
+            return salary * 3;
+        },
+        'B' : function( salary ){
+            return salary * 2;
+        }
+    };
+    var calculateBonus = function(level,salary){
+        return strategy[level](salary);
+    }
+
+    console.log(calculateBonus('S',10000));
+
+    /*
+    * 所有跟奖金计算的能力不再放在Context中，而是分别在各个的策略对象中；
+    * */
+
+</script>

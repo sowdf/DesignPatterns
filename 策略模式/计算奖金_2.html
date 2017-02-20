@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /* 使用组合函数对代码进行重构 */
+    var performanceS = function(salary){
+        return salary * 4;
+    };
+    var performanceA = function(salary){
+        return salary * 3;
+    };
+    var performanceB = function(salary){
+        return salary * 2;
+    };
+
+    var calculateBonus = function(performanceLevel,salary){
+        if( performanceLevel === 'S' ){
+            return performanceS(salary);
+        }
+        if( performanceLevel === 'A' ){
+            return performanceA(salary);
+        }
+        if( performanceLevel === 'B'){
+            return performanceB(salary);
+        }
+    }
+
+    console.log(calculateBonus('S',4000));
+</script>

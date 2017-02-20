@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+/*  使用策略模式
+*   编写对应的策略
+* */
+var performanceS = function(){};
+performanceS.prototype.calculate = function(salary){
+    return salary * 4 ;
+};
+
+var performanceA = function(){};
+performanceA.prototype.calculate = function(salary){
+    return salary * 3;
+};
+
+var performanceB = function(){};
+performanceB.prototype.calculate = function(salary){
+    return salary * 2;
+};
+
+/* 构建中间的执行层 */
+
+var Bonus = function(){
+    this.salary = null; //原始工资
+    this.strategy = null; //设置对应好的策略对象
+};
+
+Bonus.prototype.setSalary = function(salary){
+    this.salary = salary;
+};
+Bonus.prototype.setStrategy = function(strategy){  // new 一个函数 将那个函数的原型下的方法 给this.strategy
+    this.strategy = strategy;
+};
+
+Bonus.prototype.getBonus = function(){
+    return this.strategy.calculate(this.salary);
+}
+
+
+/* 使用层 如果要加一个C  只需要再 策略上加一个C */
+var bonus = new Bonus();
+bonus.setSalary(10000);
+bonus.setStrategy(new performanceA());
+
+console.log(console.log(bonus.getBonus()));
+</script>

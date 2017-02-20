@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var calculateBouns = function(performancelevel,salary){
+        if(performancelevel == 'S'){
+            return salary * 4;
+        }
+        if(performancelevel == 'A'){
+            return salary * 3;
+        }
+        if(performancelevel == 'B'){
+            return salary * 2;
+        }
+    };
+    console.log(calculateBouns('S',20000));
+    /*
+    * calculateBouns 函数比较庞大，包含了很多的if-else语句，这些语句需要覆盖所有的逻辑分支；
+    * calculateBound 函数缺乏弹性，如果增加了一种新的绩效等级C ，或者想把绩效S改成5，那我们必须深入到calculateBouns 函数的内部实现，这是违反
+    * 开放封闭原则的
+    * 算法的复用性差，如果程序的其他地方需要重用这些奖金计算的算法呢？我们的选择只有复制黏贴
+    *
+    * */
+
+
+</script>
