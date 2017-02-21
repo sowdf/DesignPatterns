@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<form action="https://www.baidu.com" id="registerForm" method="post">
+    请输入用户名：<input type="text" name="username">
+    请输入密码：<input type="text" name="password">
+    请输入手机号：<input type="text" name="phoneNumber">
+    <button>提交</button>
+</form>
+</body>
+</html>
+<script>
+    /*
+    * 让算法的利用性得到提高
+    *
+    * */
+
+    /*
+    * 对正则表达式不是很熟悉
+    * */
+
+    var strategies = {
+        isMonEmpty : function(value,errorMsg){
+            if(value == ''){
+                return errorMsg;
+            }
+
+        },
+        minLenth : function(value,length,errorMsg){
+            if(value.length < length){
+                return errorMsg;
+            }
+        },
+        isMobile : function(value,errorMsg){
+            if( !/(^1[3|5|8][0-9]{9}$)/.test( value ) ){
+                return errorMsg;
+            }
+        },
+
+    };
+    var oRegisterForm = document.getElementById('registerForm');
+    var validdataFunc = function(){
+        var username = oRegisterForm.username.value;
+        var password = oRegisterForm.password.value;
+        var phoneNumber = oRegisterForm.phoneNumber.value;
+
+        var validator = new Validator();
+
+        /* 添加表单验证规则 */
+        validator.add(username,'isMonEmpty','用户名不能为空');
+        validator.add(password,'minLenth:6','密码长度不能小于6位');
+        validator.add(phoneNumber,'isMobile','手机号码该是不正确');
+        var errorMsg = validator.start(); //获取结果
+        return errorMsg;
+    };
+    oRegisterForm.onsubmit = function(){
+        var errorMsg = validdataFunc();
+        if( errorMsg ){
+            alert(errorMsg);
+            return false;
+        }
+    }
+
+
+
+    function Validator(){
+        this.cache = [];
+    }
+
+    Validator.prototype.add = function(value,rule,errorMsg){
+        var ary = rule.split(':');
+        this.cache.push(function(){
+            var strategy = ary.shift();
+            ary.unshift(value);
+            ary.push(errorMsg);
+            return strategies[strategy].apply(null,ary);
+        });
+    };
+
+    Validator.prototype.start = function(){
+        for ( var i = 0,validatorFuc; validatorFuc = this.cache[i++];){
+            var msg = validatorFuc();
+            if(msg){
+                return msg;
+
+            }
+        }
+    }
+
+
+
+
+</script>
